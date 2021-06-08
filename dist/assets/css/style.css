@@ -1,0 +1,19 @@
+#title {
+    color: white;
+    background-color: rgb(221, 78, 78);
+
+}
+
+#info{
+    color: black;
+}
+
+.card{
+    color: white;
+    background-color: rgb(52, 107, 151);
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow:5px 10px #888888 ;
+
+}
