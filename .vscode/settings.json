@@ -1,3 +1,18 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cSpell.words": [
+        "fatimah",
+        "iconify"
+    ],
+    "cSpell.ignoreWords": [
+        "answers",
+        "body",
+        "card",
+        "class",
+        "div",
+        "h",
+        "name",
+        "style",
+        "title"
+    ]
 }

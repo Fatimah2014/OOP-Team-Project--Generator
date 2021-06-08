@@ -3,6 +3,7 @@ const fs = require('fs');
 const Manager = require('./lib/manager');
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
+
 const employeeArr = [];
 
 
@@ -17,7 +18,7 @@ let generateManager = () => {
         {
             type: "input",
             name: "id",
-            message: "Please eneter manager number:",
+            message: "Please enter manager number:",
         },
         {
             type: "input",
@@ -40,6 +41,7 @@ let generateManager = () => {
     ]).then(answer => {
 
         const manager = new Manager(answer.name, answer.id, answer.email, answer.number)
+        managerHTML(manager)
         employeeArr.push(manager);
         generateEmployees();
     });
@@ -79,19 +81,20 @@ let generateIntern = () => {
     {
         type: "input",
         name: "id",
-        messgae: "Enter intern identification number",
+        message: "Enter intern identification number",
     },
     {
         type: "input",
         name: "email",
-        messgage: "Enter intern email:",
+        message: "Enter intern email:",
     },
     {
         type: "input",
-        name: "github",
-        message: "Enter intern github url:"
+        name: "school",
+        message: "Enter intern school:"
     }]).then(answers => {
-        const intern = new Intern(answers.name, answers.id, answers.email, answers.github)
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+        internHTML(intern)
         employeeArr.push(intern);
         generateEmployees();
     })
@@ -106,27 +109,29 @@ let generateEngineer = () => {
     {
         type: "input",
         name: "id",
-        messgae: "Enter engineer identification number",
+        message: "Enter engineer identification number",
     },
     {
         type: "input",
         name: "email",
-        messgage: "Enter engineer email:",
+        message: "Enter engineer email:",
     },
     {
         type: "input",
         name: "github",
-        message: "Enter engineer gitgub url:"
+        message: "Enter engineer github url:"
     }]).then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
+        engineerHTML(engineer)
         employeeArr.push(engineer);
         generateEmployees();
     })
 
 };
 
-const managerHTML = (GenerateManager) => {
-    `<!DOCTYPE html>
+const managerHTML = (generateManager) => {
+    const answers = generateManager
+   const print = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -139,7 +144,7 @@ const managerHTML = (GenerateManager) => {
 </head>
 <body>
 <header>
-    <div id= 'title'class="jumbotron">
+    <div id= 'title' class="jumbotron">
 		<h1 id= 'title' class="text-center">My Team</h1>
 	</div>
 	<div class="container">
@@ -155,9 +160,9 @@ const managerHTML = (GenerateManager) => {
           <p class="card-text"><span class="iconify" data-icon="fa-solid:mug-hot" data-inline="false"></span> Manager</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li id= 'info'class="list-group-item">id:${answesr.id}</li>
-          <li id='info'class="list-group-item">Email:${answers.email}</li>
-          <li id='info'class="list-group-item">Office Number:${answers.number}</li>
+          <li id= 'info' class="list-group-item">id:${answers.id}</li>
+          <li id='info' class="list-group-item">Email:${answers.email}</li>
+          <li id='info' class="list-group-item">Office Number:${answers.number}</li>
         </ul>
         <div class="card-body">
           <a href="#" class="card-link"></a>
@@ -167,11 +172,13 @@ const managerHTML = (GenerateManager) => {
     
 </body>
 </html>`
-    fs.appendFile("./dist/team.html", managerHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
+    fs.writeFile("./dist/example.html", print, (err) => err ? console.log(err) : console.log('successfully created card'))
 };
 
-const engineerHTML = (GenerateEngineer) => {
-    `
+const engineerHTML = (generateEngineer) => {
+    const answers = generateEngineer
+
+    const print = `
 <div class="card" style="width: 18rem;">
 
     <div class="card-body">
@@ -179,20 +186,21 @@ const engineerHTML = (GenerateEngineer) => {
       <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li id= 'info'class="list-group-item">id:${answers.id}</li>
-      <li id='info'class="list-group-item">Email:${answers.email}</li>
-      <li id='info'class="list-group-item">Github:${answers.github}</li>
+      <li id= 'info' class="list-group-item">id:${answers.id}</li>
+      <li id='info' class="list-group-item">Email:${answers.email}</li>
+      <li id='info' class="list-group-item">Github:${answers.github}</li>
     </ul>
     <div class="card-body">
       <a href="#" class="card-link"></a>
       <a href="#" class="card-link"></a>
     </div>
   </div>`
-    fs.appendFile("./dist/team.html", engineerHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
+    fs.appendFile("./dist/example.html", print, (err) => err ? console.log(err) : console.log('successfully created card'))
 
 };
 
-const internHTML = (GenerateIntern) => {
+const internHTML = (generateIntern) => {
+    const answers = generateIntern
     `
     <div class="card" style="width: 18rem;">
     
@@ -201,27 +209,27 @@ const internHTML = (GenerateIntern) => {
           <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li id= 'info'class="list-group-item">id:${answers.id}</li>
-          <li id='info'class="list-group-item">Email:${answers.email}</li>
-          <li id='info'class="list-group-item">Github:${answers.github}</li>
+          <li id= 'info' class="list-group-item">id:${answers.id}</li>
+          <li id='info' class="list-group-item">Email:${answers.email}</li>
+          <li id='info' class="list-group-item">Github:${answers.school}</li>
         </ul>
         <div class="card-body">
           <a href="#" class="card-link"></a>
           <a href="#" class="card-link"></a>
         </div>
       </div>`
-    fs.appendFile("./dist/team.html", internHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
+    fs.appendFile("./dist/example.html", internHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
 };
 
 const generateTeam = () => {
     inquirer.prompt([
         {
             type: "confirm",
-            name: "newMemeber",
-            message: "Would you like to add another team memeber?",
+            name: "newMember",
+            message: "Would you like to add a team member?",
             default: true,
         }]).then((answers) => {
-            if (answers.newMemeber){
+            if (answers.newMember){
                 generateManager();
             }else{
                 console.log("ok, byeee")
@@ -230,6 +238,7 @@ const generateTeam = () => {
 };
 
 generateTeam()
+
     //     } else {
     //         console.log('successfully created team member card');
     //    return;
