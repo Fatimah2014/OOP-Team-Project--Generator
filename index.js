@@ -30,22 +30,26 @@ let generateManager = () => {
             type: "input",
             name: "number",
             message: "Please enter Manager office number:",
-            validate: answer => {
-                if (answer < 0) {
+            validate: answers => {
+                if (answers < 0) {
                     console.log("must enter manager office number!!!!")
                     return false;
                 }
                 return true;
             }
         }
-    ]).then(answer => {
+    ]).then(answers => {
 
-        const manager = new Manager(answer.name, answer.id, answer.email, answer.number)
-        managerHTML(manager)
+        const manager = new Manager(answers.name, answers.id, answers.email, answers.number)
+        
         employeeArr.push(manager);
         generateEmployees();
     });
 };
+
+
+
+
 
 let generateEmployees = () => {
     inquirer.prompt([
@@ -66,11 +70,14 @@ let generateEmployees = () => {
                     fs.writeFile("./dist/example.html", JSON.stringify(employeeArr), err => {
                         if(err) throw err;
                     })
-                    console.log("bye felicia")
+                    console.log("Done")
                     break;
             }
         });
 };
+
+
+
 
 let generateIntern = () => {
     inquirer.prompt([{
@@ -94,11 +101,14 @@ let generateIntern = () => {
         message: "Enter intern school:"
     }]).then(answers => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
-        internHTML(intern)
+  
         employeeArr.push(intern);
         generateEmployees();
     })
 };
+
+
+
 
 let generateEngineer = () => {
     inquirer.prompt([{
@@ -122,7 +132,7 @@ let generateEngineer = () => {
         message: "Enter engineer github url:"
     }]).then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
-        engineerHTML(engineer)
+     
         employeeArr.push(engineer);
         generateEmployees();
     })
@@ -131,7 +141,7 @@ let generateEngineer = () => {
 
 const managerHTML = (generateManager) => {
     const answers = generateManager
-   const print = `<!DOCTYPE html>
+  `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -168,17 +178,17 @@ const managerHTML = (generateManager) => {
           <a href="#" class="card-link"></a>
           <a href="#" class="card-link"></a>
         </div>
-      </div>
-    
-</body>
-</html>`
-    fs.writeFile("./dist/example.html", print, (err) => err ? console.log(err) : console.log('successfully created card'))
+`
+
+    fs.writeFile("./dist/example.html", managerHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
 };
+
+
+
 
 const engineerHTML = (generateEngineer) => {
     const answers = generateEngineer
-
-    const print = `
+     const print = `
 <div class="card" style="width: 18rem;">
 
     <div class="card-body">
@@ -193,11 +203,11 @@ const engineerHTML = (generateEngineer) => {
     <div class="card-body">
       <a href="#" class="card-link"></a>
       <a href="#" class="card-link"></a>
-    </div>
-  </div>`
+    </div>`
     fs.appendFile("./dist/example.html", print, (err) => err ? console.log(err) : console.log('successfully created card'))
-
 };
+
+
 
 const internHTML = (generateIntern) => {
     const answers = generateIntern
@@ -221,6 +231,7 @@ const internHTML = (generateIntern) => {
     fs.appendFile("./dist/example.html", internHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
 };
 
+
 const generateTeam = () => {
     inquirer.prompt([
         {
@@ -237,7 +248,10 @@ const generateTeam = () => {
         })
 };
 
+
 generateTeam()
+
+
 
     //     } else {
     //         console.log('successfully created team member card');
