@@ -129,7 +129,7 @@ generateManager = () => {
 const internHTML = (answers) => {
     const html2 = 
 `
-    <div id="eng" class="card" style="width: 18rem;">
+    <div  class="card" style="width: 18rem;">
     
         <div class="card-body">
         <h5 class="card-title"><span style= "color:white">Tucker</h5>
@@ -182,10 +182,10 @@ const internHTML = (answers) => {
 
 const engineerHTML = (answers) => {
     const htm3 =  `
-<div class="card" style="width: 18rem;">
+<div id="eng" class="card" style="width: 18rem;">
 
-    <div class="card-body">
-      <h5 class="card-title">${answers.name}</h5>
+    <div  class="card-body">
+      <h5 class="card-title"><span style= "color:white">${answers.name}</span></h5>
       <p class="card-text"><span style= "color: white"class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> <span style = "color:white" >Engineer</span></p>
     </div>
     <ul class="list-group list-group-flush">
@@ -195,7 +195,7 @@ const engineerHTML = (answers) => {
     </ul>
     <div class="card-body">
       <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span></a>
-      <a href="https://github.com/${answers.github}" class="card-link"><span style= "color:white">Github Link Link</span></a>
+      <a href="https://github.com/${answers.github}" class="card-link"><span style= "color:white">Github Link</span></a>
       </div>
     </div>`
     fs.appendFile("./dist/example.html", htm3, (err) => err ? console.log(err) : console.log('successfully created card'))
@@ -266,22 +266,6 @@ generateTeam()
     `
     fs.appendFile("./dist/example.html", endHTML, (err) => err ? console.log(err) : console.log('') )
 }
-
-
-
-
-
-    //     } else {
-    //         console.log('successfully created team member card');
-    //    return;
-    //     fs.appendFile('.dist/team.html',  (err) => err ? console.log(err) : ))
-
-
-    // })};
-
-
-
-
 
 
 
