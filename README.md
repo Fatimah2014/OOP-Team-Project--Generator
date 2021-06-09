@@ -1,6 +1,9 @@
 # OOP Team Project Generator
 ### 06/06/2021
 
+![Screenshot (46)](https://user-images.githubusercontent.com/80806004/121308319-ea05d100-c8ce-11eb-9e63-fbc5290c3aa4.png)
+
+
 # Description
 
 >- My motivation is to build a Node.js command-line application that takes in information about empluees on a software engineering team, then generates an HTML webpage that displays summaries for each person.
