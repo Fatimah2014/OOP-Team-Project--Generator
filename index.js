@@ -39,7 +39,7 @@ const managerHTML = answers => {
         </ul>
         <div class="card-body">
           <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span</a>
-          <a href="#" class="card-link"></a>
+        
         </div>
         </div>
 `
@@ -132,8 +132,8 @@ const internHTML = (answers) => {
     <div id="eng" class="card" style="width: 18rem;">
     
         <div class="card-body">
-          <h5 class="card-title">${answers.name}</h5>
-          <p class="card-text"> <span class="iconify" data-icon="fa-solid:user-graduate" data-inline="false"></span> Intern</p>
+        <h5 class="card-title"><span style= "color:white">Tucker</h5>
+        <p class="card-text"> <span style="color:white"class=" iconify" data-icon="fa-solid:user-graduate" data-inline="false"></span><span style= "color: white"> Intern</span></p>
         </div>
         <ul class="list-group list-group-flush">
           <li id= 'info' class="list-group-item">id: ${answers.id}</li>
@@ -186,7 +186,7 @@ const engineerHTML = (answers) => {
 
     <div class="card-body">
       <h5 class="card-title">${answers.name}</h5>
-      <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
+      <p class="card-text"><span style= "color: white"class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> <span style = "color:white" >Engineer</span></p>
     </div>
     <ul class="list-group list-group-flush">
       <li id= 'info' class="list-group-item">id: ${answers.id}</li>
@@ -195,7 +195,7 @@ const engineerHTML = (answers) => {
     </ul>
     <div class="card-body">
       <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span></a>
-      <a href="https//github.com/${answers.github}" class="card-link"><span style= "color:white">Github Link Link</span></a>
+      <a href="https://github.com/${answers.github}" class="card-link"><span style= "color:white">Github Link Link</span></a>
       </div>
     </div>`
     fs.appendFile("./dist/example.html", htm3, (err) => err ? console.log(err) : console.log('successfully created card'))
@@ -307,18 +307,3 @@ generateTeam()
 
 
 
-
-
-// // // TODO: Include packages needed for this application
-
-// // // TODO: Create an array of questions for user input
-// // const questions = [];
-
-// // // TODO: Create a function to write README file
-// // function writeToFile(fileName, data) {}
-
-// // // TODO: Create a function to initialize app
-// // function init() {}
-
-// // // Function call to initialize app
-// // init();
