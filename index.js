@@ -252,14 +252,13 @@ const generateTeam = () => {
             }
         })
 };
-generateTeam()
+ generateTeam()
 
 
  const generateBottom = () => {
 
     const endHTML = 
-    `
-    </div>
+    ` </div>
     </div>
     </body>
     </html>
