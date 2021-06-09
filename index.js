@@ -103,6 +103,7 @@ generateManager = () => {
         }]).then(chosen => {
             switch (chosen.position) {
                 case "engineer":
+                    
                    // new Engineer()
                     generateEngineer();
                     break;
