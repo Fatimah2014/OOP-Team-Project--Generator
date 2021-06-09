@@ -10,4 +10,9 @@ describe("Manager Class test all", () => {
         expect(manager.getEmail()).toBe("qadir_fatimah@yahoo.com")
         
     })
+
+    it("apply name function returns the name", () => {
+        expect(manager.getName()).toNotBe("Noah")
+        
+    })
 })

@@ -6,8 +6,50 @@ const Intern = require("./lib/intern");
 
 const employeeArr = [];
 
+const managerHTML = answers => {
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>OOP-Team-Project-Generator</title>
+</head>
+<body>
+<header>
+    <div id= 'title' class="jumbotron">
+		<h1 id= 'title' class="text-center">My Team</h1>
+	</div>
+</header>
 
-let generateManager = () => {
+<div class="container">
+    <div id= "leader"class="card" style="width: 18rem;">
+
+        <div class="card-body" >
+          <h5 class="card-title">${answers.name}</h5>
+          <p class="card-text"><span class="iconify" data-icon="fa-solid:mug-hot" data-inline="false"></span> Manager</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li id= 'info' class="list-group-item">id: ${answers.id}</li>
+          <li id='info' class="list-group-item">Email: ${answers.email}</li>
+          <li id='info' class="list-group-item">Office Number: ${answers.number}</li>
+        </ul>
+        <div class="card-body">
+          <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span</a>
+          <a href="#" class="card-link"></a>
+        </div>
+        </div>
+`
+
+    fs.writeFile("./dist/example.html", html, (err) => err ? console.log(err) : console.log('successfully created card'))
+};
+
+
+
+generateManager = () => {
     inquirer.prompt([
         {
             type: "input",
@@ -39,19 +81,20 @@ let generateManager = () => {
             }
         }
     ]).then(answers => {
-
+//pushes answers
         const manager = new Manager(answers.name, answers.id, answers.email, answers.number)
         
         employeeArr.push(manager);
+        managerHTML(answers)
         generateEmployees();
+
+        
     });
 };
 
 
 
-
-
-let generateEmployees = () => {
+ generateEmployees = () => {
     inquirer.prompt([
         {
             type: 'list',
@@ -60,17 +103,22 @@ let generateEmployees = () => {
         }]).then(chosen => {
             switch (chosen.position) {
                 case "engineer":
+                   // new Engineer()
                     generateEngineer();
                     break;
                 case "intern":
+                    
                     generateIntern();
                     break;
                 case "No More":
                     console.log(employeeArr)
-                    fs.writeFile("./dist/example.html", JSON.stringify(employeeArr), err => {
-                        if(err) throw err;
-                    })
-                    console.log("Done")
+                   // fs.writeFile("./dist/example.html", JSON.stringify(employeeArr), err => {
+                     //   if(err) throw err;
+                    //})
+
+                    // generate the html with all the employees and manager
+                    console.log("done")
+                    generateBottom();
                     break;
             }
         });
@@ -78,8 +126,30 @@ let generateEmployees = () => {
 
 
 
+const internHTML = (answers) => {
+    const html2 = 
+`
+    <div id="eng" class="card" style="width: 18rem;">
+    
+        <div class="card-body">
+          <h5 class="card-title">${answers.name}</h5>
+          <p class="card-text"> <span class="iconify" data-icon="fa-solid:user-graduate" data-inline="false"></span> Intern</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li id= 'info' class="list-group-item">id: ${answers.id}</li>
+          <li id='info' class="list-group-item">Email: ${answers.email}</li>
+          <li id='info' class="list-group-item">Github: ${answers.school}</li>
+        </ul>
+        <div class="card-body">
+          <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span</a>
+        </div>
+      </div>`
+    fs.appendFile("./dist/example.html", html2, (err) => err ? console.log(err) : console.log('successfully created card'))
+};
 
-let generateIntern = () => {
+
+
+ generateIntern = () => {
     inquirer.prompt([{
         type: "input",
         name: "name",
@@ -103,11 +173,33 @@ let generateIntern = () => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
   
         employeeArr.push(intern);
+        internHTML(answers)
         generateEmployees();
     })
 };
 
 
+
+const engineerHTML = (answers) => {
+    const htm3 =  `
+<div class="card" style="width: 18rem;">
+
+    <div class="card-body">
+      <h5 class="card-title">${answers.name}</h5>
+      <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li id= 'info' class="list-group-item">id: ${answers.id}</li>
+      <li id='info' class="list-group-item">Email: ${answers.email}</li>
+      <li id='info' class="list-group-item">Github: ${answers.github}</li>
+    </ul>
+    <div class="card-body">
+      <a href="mailto:${answers.email}" class="card-link"><span style= "color:white">Email Link</span></a>
+      <a href="https//github.com/${answers.github}" class="card-link"><span style= "color:white">Github Link Link</span></a>
+      </div>
+    </div>`
+    fs.appendFile("./dist/example.html", htm3, (err) => err ? console.log(err) : console.log('successfully created card'))
+};
 
 
 let generateEngineer = () => {
@@ -129,107 +221,19 @@ let generateEngineer = () => {
     {
         type: "input",
         name: "github",
-        message: "Enter engineer github url:"
+        message: "Enter engineer github user name:"
     }]).then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github)
      
         employeeArr.push(engineer);
+        engineerHTML(answers)
         generateEmployees();
     })
 
 };
 
-const managerHTML = (generateManager) => {
-    const answers = generateManager
-  `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>OOP-Team-Project-Generator</title>
-</head>
-<body>
-<header>
-    <div id= 'title' class="jumbotron">
-		<h1 id= 'title' class="text-center">My Team</h1>
-	</div>
-	<div class="container">
-		
-	</div>
-</header>
-
-   
-    <div class="card" style="width: 18rem;">
-
-        <div class="card-body">
-          <h5 class="card-title">${answers.name}</h5>
-          <p class="card-text"><span class="iconify" data-icon="fa-solid:mug-hot" data-inline="false"></span> Manager</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li id= 'info' class="list-group-item">id:${answers.id}</li>
-          <li id='info' class="list-group-item">Email:${answers.email}</li>
-          <li id='info' class="list-group-item">Office Number:${answers.number}</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link"></a>
-          <a href="#" class="card-link"></a>
-        </div>
-`
-
-    fs.writeFile("./dist/example.html", managerHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
-};
 
 
-
-
-const engineerHTML = (generateEngineer) => {
-    const answers = generateEngineer
-     const print = `
-<div class="card" style="width: 18rem;">
-
-    <div class="card-body">
-      <h5 class="card-title">${answers.name}</h5>
-      <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li id= 'info' class="list-group-item">id:${answers.id}</li>
-      <li id='info' class="list-group-item">Email:${answers.email}</li>
-      <li id='info' class="list-group-item">Github:${answers.github}</li>
-    </ul>
-    <div class="card-body">
-      <a href="#" class="card-link"></a>
-      <a href="#" class="card-link"></a>
-    </div>`
-    fs.appendFile("./dist/example.html", print, (err) => err ? console.log(err) : console.log('successfully created card'))
-};
-
-
-
-const internHTML = (generateIntern) => {
-    const answers = generateIntern
-    `
-    <div class="card" style="width: 18rem;">
-    
-        <div class="card-body">
-          <h5 class="card-title">${answers.name}</h5>
-          <p class="card-text"><span class="iconify" data-icon="akar-icons:glasses" data-inline="false"></span> Engineer</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li id= 'info' class="list-group-item">id:${answers.id}</li>
-          <li id='info' class="list-group-item">Email:${answers.email}</li>
-          <li id='info' class="list-group-item">Github:${answers.school}</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link"></a>
-          <a href="#" class="card-link"></a>
-        </div>
-      </div>`
-    fs.appendFile("./dist/example.html", internHTML, (err) => err ? console.log(err) : console.log('successfully created card'))
-};
 
 
 const generateTeam = () => {
@@ -243,13 +247,27 @@ const generateTeam = () => {
             if (answers.newMember){
                 generateManager();
             }else{
-                console.log("ok, byeee")
+                
+                console.log("please start again")
             }
         })
 };
-
-
 generateTeam()
+
+
+ const generateBottom = () => {
+
+    const endHTML = 
+    `
+    </div>
+    </div>
+    </body>
+    </html>
+    `
+    fs.appendFile("./dist/example.html", endHTML, (err) => err ? console.log(err) : console.log('') )
+}
+
+
 
 
 

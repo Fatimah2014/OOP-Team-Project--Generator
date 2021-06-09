@@ -1,19 +1,31 @@
 #title {
     color: white;
-    background-color: rgb(221, 78, 78);
-
+    
+    background-image: linear-gradient(to right,rgb(32, 75, 131) , rgb(12, 23, 73));
 }
 
 #info{
     color: black;
 }
+.container{
+display: inline;display: inline-block;
+display: flex;
+flex-wrap: wrap;
 
+row-gap: 20px;
+}
+    
+#leader{
+    background-color: navy;
+}
+#eng{
+    background-color: rgb(35, 93, 170);
+}
 .card{
     color: white;
-    background-color: rgb(52, 107, 151);
+    background-color: rgb(100, 125, 173);
+    box-shadow: 5px 5px 5px 5px grey;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow:5px 10px #888888 ;
+  margin: auto;
 
-}
+    }
